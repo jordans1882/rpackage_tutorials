@@ -13,5 +13,4 @@ before_script:
 
 script:
   - ./_build.sh
-  - ./_build.sh
   - ./_deploy.sh
