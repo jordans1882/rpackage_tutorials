@@ -3,12 +3,8 @@ Type: Book
 Title: Does not matter.
 Version: 0.0.1
 Imports:
-    brocks,
+    JAS,
     servr,
     knitr,
     formatR,
-    metricsgraphics,
-    leaflet,
-    threejs,
-    maps
-Remotes: brendan-r/brocks
+Remotes: jordans1882/jas
