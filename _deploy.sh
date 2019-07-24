@@ -2,6 +2,7 @@
 
 set -e
 
+echo "Hello World"
 echo ${GITHUB_PAT}
 echo ${TRAVIS_BRANCH}
 echo ${TRAVIS_REPO_SLUG}
@@ -18,3 +19,4 @@ cp -r ../_site/* ./
 git add --all *
 git commit -m "Deploy update of the site" || true
 git push -q origin gh-pages
+
