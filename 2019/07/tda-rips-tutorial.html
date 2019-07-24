@@ -80,14 +80,14 @@ simplicial complexes, filtrations, and the Rips complex.</p>
 generalizations of triangles. More specifically, an <em><script type="math/tex">n</script>-simplex</em> is the convex hull of <script type="math/tex">n+1</script>
 affinely independent points.</p>
 
-<p><img src="/rpackage_tutorialsfigure/source/tda-rips-tutorial/2019-07-24-tda-rips-tutorial/simplices_plot-1.png" title="plot of chunk simplices_plot" alt="plot of chunk simplices_plot" style="display: block; margin: auto;" /></p>
+<p><img src="/rpackage_tutorials/figure/source/tda-rips-tutorial/2019-07-24-tda-rips-tutorial/simplices_plot-1.png" title="plot of chunk simplices_plot" alt="plot of chunk simplices_plot" style="display: block; margin: auto;" /></p>
 
 <p>A simplicial complex is a nice way of combining simplices. In particular, a <em>simplicial complex</em>
 is a finite collection of simplices, <script type="math/tex">K</script>, such that (1) if <script type="math/tex">\sigma \in K</script> and <script type="math/tex">\tau\leq \sigma</script>,
 then <script type="math/tex">\tau \in K</script>, and (2) if <script type="math/tex">\sigma, \sigma'\in K</script>, then <script type="math/tex">\sigma\cap \sigma'</script> is either empty
 or a face of both.</p>
 
-<p><img src="/rpackage_tutorialsfigure/source/tda-rips-tutorial/2019-07-24-tda-rips-tutorial/simplicialcomplex-1.png" title="plot of chunk simplicialcomplex" alt="plot of chunk simplicialcomplex" style="display: block; margin: auto;" /></p>
+<p><img src="/rpackage_tutorials/figure/source/tda-rips-tutorial/2019-07-24-tda-rips-tutorial/simplicialcomplex-1.png" title="plot of chunk simplicialcomplex" alt="plot of chunk simplicialcomplex" style="display: block; margin: auto;" /></p>
 
 <h3 id="rips-complex">Rips Complex</h3>
 
@@ -107,7 +107,7 @@ metric.</p>
 <p><strong>Note:</strong> Many people also define <script type="math/tex">\text{VR}(r) :=\{\sigma\subset S \mid \text{diam}(\sigma)\leq 2r\}</script>.
 However, the algorithms used in the R-TDA package use the first definition.</p>
 
-<p><img src="/rpackage_tutorialsfigure/source/tda-rips-tutorial/2019-07-24-tda-rips-tutorial/ripscomplex-1.png" title="plot of chunk ripscomplex" alt="plot of chunk ripscomplex" style="display: block; margin: auto;" /></p>
+<p><img src="/rpackage_tutorials/figure/source/tda-rips-tutorial/2019-07-24-tda-rips-tutorial/ripscomplex-1.png" title="plot of chunk ripscomplex" alt="plot of chunk ripscomplex" style="display: block; margin: auto;" /></p>
 
 <h3 id="filtrations">Filtrations</h3>
 
@@ -116,7 +116,7 @@ empty set and ending with the full simplicial complex i.e.,</p>
 
 <script type="math/tex; mode=display">\emptyset \subset K_1 \subset K_2 \subset ... \subset K.</script>
 
-<p><img src="/rpackage_tutorialsfigure/source/tda-rips-tutorial/2019-07-24-tda-rips-tutorial/bobcat-1.png" title="plot of chunk bobcat" alt="plot of chunk bobcat" style="display: block; margin: auto;" /></p>
+<p><img src="/rpackage_tutorials/figure/source/tda-rips-tutorial/2019-07-24-tda-rips-tutorial/bobcat-1.png" title="plot of chunk bobcat" alt="plot of chunk bobcat" style="display: block; margin: auto;" /></p>
 
 <p>Going back to the Rips complex, we consider <script type="math/tex">r</script> to be a free parameter. If we vary <script type="math/tex">r</script>, we get
 different Rips complexes. There is often not a best choice for <script type="math/tex">r</script>, so why not look at all of
@@ -137,7 +137,7 @@ means we add a 1-simplex between <script type="math/tex">(0,0)</script> and <scr
 
 <p>Here is an illustration of the Rips filtration on <script type="math/tex">S</script>.</p>
 
-<p><img src="/rpackage_tutorialsfigure/source/tda-rips-tutorial/2019-07-24-tda-rips-tutorial/ripsfilt2-1.png" title="plot of chunk ripsfilt2" alt="plot of chunk ripsfilt2" style="display: block; margin: auto;" /></p>
+<p><img src="/rpackage_tutorials/figure/source/tda-rips-tutorial/2019-07-24-tda-rips-tutorial/ripsfilt2-1.png" title="plot of chunk ripsfilt2" alt="plot of chunk ripsfilt2" style="display: block; margin: auto;" /></p>
 
 <h1 id="applications-of-rips-complexes-and-filtrations">Applications of Rips Complexes and Filtrations</h1>
 
@@ -167,15 +167,19 @@ complexes do not favor a specific type of alignment of the input. <strong>TODO: 
 <h3 id="toy-example">Toy Example</h3>
 <p>First, let’s go back to the example where <script type="math/tex">S:=\{(0,0),(1,0),(0,2),(1,2),(3,1)\}</script>. We will compute the Rips filtration using the R-TDA package.</p>
 
-<figure class="highlight"><pre><code class="language-r" data-lang="r"><span class="n">library</span><span class="p">(</span><span class="n">TDA</span><span class="p">)</span><span class="w"> </span><span class="c1"># upload TDA package</span><span class="w">
+<figure class="highlight"><pre><code class="language-r" data-lang="r"><span class="n">library</span><span class="p">(</span><span class="n">TDA</span><span class="p">)</span><span class="w"> </span><span class="c1"># upload TDA package</span></code></pre></figure>
 
-</span><span class="n">S</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">cbind</span><span class="p">(</span><span class="nf">c</span><span class="p">(</span><span class="m">0</span><span class="p">,</span><span class="m">1</span><span class="p">,</span><span class="m">0</span><span class="p">,</span><span class="m">1</span><span class="p">,</span><span class="m">3</span><span class="p">),</span><span class="nf">c</span><span class="p">(</span><span class="m">0</span><span class="p">,</span><span class="m">0</span><span class="p">,</span><span class="m">2</span><span class="p">,</span><span class="m">2</span><span class="p">,</span><span class="m">1</span><span class="p">))</span><span class="w"> </span><span class="c1"># write S into R</span><span class="w">
+<figure class="highlight"><pre><code class="language-text" data-lang="text">## Error in library(TDA): there is no package called 'TDA'</code></pre></figure>
+
+<figure class="highlight"><pre><code class="language-r" data-lang="r"><span class="n">S</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">cbind</span><span class="p">(</span><span class="nf">c</span><span class="p">(</span><span class="m">0</span><span class="p">,</span><span class="m">1</span><span class="p">,</span><span class="m">0</span><span class="p">,</span><span class="m">1</span><span class="p">,</span><span class="m">3</span><span class="p">),</span><span class="nf">c</span><span class="p">(</span><span class="m">0</span><span class="p">,</span><span class="m">0</span><span class="p">,</span><span class="m">2</span><span class="p">,</span><span class="m">2</span><span class="p">,</span><span class="m">1</span><span class="p">))</span><span class="w"> </span><span class="c1"># write S into R</span><span class="w">
 
 </span><span class="n">maxscale</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="m">5</span><span class="w"> </span><span class="c1"># limit of the filtration</span><span class="w">
 
 </span><span class="n">maxdimension</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="m">2</span><span class="w"> </span><span class="c1"># components , loops, and voids</span><span class="w">
 
 </span><span class="n">S_RipsFilt</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">ripsFiltration</span><span class="p">(</span><span class="n">S</span><span class="p">,</span><span class="w"> </span><span class="n">maxdimension</span><span class="p">,</span><span class="w"> </span><span class="n">maxscale</span><span class="p">,</span><span class="w"> </span><span class="n">dist</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"euclidean"</span><span class="p">,</span><span class="w"> </span><span class="n">printProgress</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">FALSE</span><span class="p">)</span></code></pre></figure>
+
+<figure class="highlight"><pre><code class="language-text" data-lang="text">## Error in ripsFiltration(S, maxdimension, maxscale, dist = "euclidean", : could not find function "ripsFiltration"</code></pre></figure>
 
 <p><strong>TODO: Add example with a “weird” distance</strong></p>
 
